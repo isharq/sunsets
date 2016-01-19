@@ -1,14 +1,14 @@
 //
-//  FirstViewController.swift
+//  ViewController.swift
 //  All Sunsets
 //
-//  Created by Haje Jan kamps on 14/01/2016.
+//  Created by Haje Jan kamps on 19/01/2016.
 //  Copyright © 2016 Kamps Consulting. All rights reserved.
 //
 
 import UIKit
 
-class FirstViewController: UIViewController {
+class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

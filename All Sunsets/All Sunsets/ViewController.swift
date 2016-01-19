@@ -33,6 +33,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         latLabel.text = "Latitude: \(currentLocation!.latitude)"
         longLabel.text = "Longitude: \(currentLocation!.longitude)"
         
+<<<<<<< HEAD
         // Calculate sunset
         // based on http://williams.best.vwh.net/sunrise_sunset_algorithm.htm
     
@@ -124,11 +125,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         let T = H + RA - (0.06571 * t) - 6.622
         
          print("T \(T)")
+=======
         
-        var UT = T - lngHour
+>>>>>>> parent of 1fbc65e... Calculations before 180/pi conversion
         
-         print("UT just created \(UT)")
         
+        
+<<<<<<< HEAD
         // Adjust UT into range if required
         if UT > 24 { UT = UT - 24 }
         if UT < 0 { UT = UT + 24 }
@@ -143,7 +146,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
         // END Calculate sunset
     
+=======
+>>>>>>> parent of 1fbc65e... Calculations before 180/pi conversion
     }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

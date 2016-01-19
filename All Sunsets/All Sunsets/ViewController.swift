@@ -40,6 +40,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
         let pi = 3.14159265
         
+        print("pi \(pi)")
+        
         let date = NSDate()
         let calendar = NSCalendar.currentCalendar()
         let components = calendar.components([.Day , .Month , .Year], fromDate: date)
@@ -57,16 +59,22 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
          n2 = floor((month + 9)/12)
          n3 = (1 + floor((year - 4) * floor(year/4) + 2) / 3)
          n = n1 - (n2 * n3) + day - 30
-
+        
+         print("n \(n)")
 
         let lngHour = currentLocation!.longitude / 15
         
+        print("lngHour \(lngHour)")
+        
         let t = n + ((18-lngHour)/24)
         
-        let M = (0.9856 * t) - 3.289
+        let M = ((0.9856 * t) - 3.289 )
         
-        var L = M + (1.916 * sin(M)) + (0.020 * sin(2 * M)) + 282.634
+        var L = M + (1.916 * sin(M))
+            L = L + (0.020 * sin(2 * M))
+            L = L + 282.634
         
+         print("L \(L)")
         
         // Adjust L into range if required
         if L > 360 { L = L - 360 }
@@ -81,14 +89,21 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
         RA = RA / 15
 
+        print("RA \(RA)")
+        
         let sinDec = 0.39782 * sin(L)
-        let cosDec = cos(asin(sinDec))
+        let cosDec =  cos(asin(sinDec))
         
-        let myLatitude = currentLocation!.latitude
         
-        let cosH = cos(zenith) - (sinDec * sin(myLatitude)) / (cosDec * cos(myLatitude))
-    
-        print("cosH after creation \(cosH)")
+        print("sinDec \(sinDec)")
+        print("cosDec \(cosDec)")
+        
+        var cosH = cos(zenith)
+                print("cosH round 1 \(cosH)")
+            cosH = cosH - (sinDec * sin(currentLocation!.latitude))
+                print("cosH round 2 \(cosH)")
+            cosH = cosH / (cosDec * cos(currentLocation!.latitude))
+                print("cosH round 3 \(cosH)")
 
         /*
         if (cosH >  1)
@@ -97,13 +112,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         the sun never sets on this location (on the specified date)
         */
         
-        print("cosH after convertion \(cosH)")
-        
         // this is where it goes wrong
         var H = Double(acos(cosH))
-        
 
-        print("H after creation \(H)")
+        print("H created as \(H)")
 
         H = H / 15.0
         
@@ -122,8 +134,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         if UT < 0 { UT = UT + 24 }
         
          print("UT after logic \(UT)")
-        
-        
         
         
         // 0 here is time adjustment to local time. The below is UTC

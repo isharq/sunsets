@@ -34,6 +34,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         longLabel.text = "Longitude: \(currentLocation!.longitude)"
         
 <<<<<<< HEAD
+<<<<<<< HEAD
         // Calculate sunset
         // based on http://williams.best.vwh.net/sunrise_sunset_algorithm.htm
     
@@ -147,6 +148,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         // END Calculate sunset
     
 =======
+>>>>>>> parent of 1fbc65e... Calculations before 180/pi conversion
+=======
+        
+        
+        
+        
 >>>>>>> parent of 1fbc65e... Calculations before 180/pi conversion
     }
 

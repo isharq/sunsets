@@ -10,11 +10,67 @@ import UIKit
 import CoreLocation
 
 class ViewController: UIViewController, CLLocationManagerDelegate {
+    
+    //    @IBOutlet weak var testlabel: UILabel!
     @IBOutlet weak var longLabel: UILabel!
     @IBOutlet weak var latLabel: UILabel!
+    @IBOutlet weak var timeNowLabel: UILabel!
+    @IBOutlet weak var timeSunsetLabel: UILabel!
+    @IBOutlet weak var countdownSunsetLabel: UILabel!
 
     // initiate core location
     private var locationManager = CLLocationManager()
+    
+    func updateTime()
+    {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.timeStyle = .MediumStyle
+        
+        let timeString = "\(dateFormatter.stringFromDate(NSDate()))"
+        
+        timeNowLabel.text = timeString
+    }
+    
+    func getLatitude(){
+        
+        let currentLocation = locationManager.location?.coordinate
+
+        
+    }
+    func getLongitude(){
+        
+    }
+    
+    func updateCountdown()
+    {
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.timeStyle = .MediumStyle
+        
+        // let sunsetTime = GetSunset(getLatitude(), getLongitude())
+        
+       // var totalWorkTime = NSDate().timeIntervalSinceDate(sunsetTime)
+        
+        let timeString = "\(dateFormatter.stringFromDate(NSDate()))"
+
+        
+        countdownSunsetLabel.text = timeString
+    }
+    
+    func timerUpdate()
+    {
+        updateTime()
+        updateCountdown()
+    }
+    
+    func updateSunsetLabel(time: NSDate)
+    {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.timeStyle = .MediumStyle
+
+        let timeString = "\(dateFormatter.stringFromDate(time))"
+        timeSunsetLabel.text = timeString
+    }
     
     // Run on load
     override func viewDidLoad() {
@@ -26,112 +82,26 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.distanceFilter = kCLDistanceFilterNone
         locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
         
-        print("Ok, finding location")
-        
-        var currentLocation = locationManager.location?.coordinate
+        let currentLocation = locationManager.location?.coordinate
         
         latLabel.text = "Latitude: \(currentLocation!.latitude)"
         longLabel.text = "Longitude: \(currentLocation!.longitude)"
         
+        // Run an update on the time
+        updateTime()
+        
         // Calculate sunset
-        // based on http://williams.best.vwh.net/sunrise_sunset_algorithm.htm
-    
-        let zenith = 96.0
         
-        let pi = 3.14159265
+        let sunsetTime = GetSunset(currentLocation!.latitude, longitude: currentLocation!.longitude)
         
-        let date = NSDate()
-        let calendar = NSCalendar.currentCalendar()
-        let components = calendar.components([.Day , .Month , .Year], fromDate: date)
-        
-        let year    = Double(components.year)
-        let month   = Double(components.month)
-        let day     = Double(components.day)
-        
-        var n1 = 0.0
-        var n2 = 0.0
-        var n3 = 0.0
-        var n = 0.0
-        
-         n1 = floor(275 * month  / 9)
-         n2 = floor((month + 9)/12)
-         n3 = (1 + floor((year - 4) * floor(year/4) + 2) / 3)
-         n = n1 - (n2 * n3) + day - 30
-
-
-        let lngHour = currentLocation!.longitude / 15
-        
-        let t = n + ((18-lngHour)/24)
-        
-        let M = (0.9856 * t) - 3.289
-        
-        var L = M + (1.916 * sin(M)) + (0.020 * sin(2 * M)) + 282.634
-        
-        
-        // Adjust L into range if required
-        if L > 360 { L = L - 360 }
-        if L < 0 { L = L + 360 }
-        
-        var RA = atan(0.91764 * tan(L))
-        
-        let Lquadrant  = (floor( L/90)) * 90
-        let RAquadrant = (floor(RA/90)) * 90
-        
-        RA = RA + (Lquadrant - RAquadrant)
-        
-        RA = RA / 15
-
-        let sinDec = 0.39782 * sin(L)
-        let cosDec = cos(asin(sinDec))
-        
-        let myLatitude = currentLocation!.latitude
-        
-        let cosH = cos(zenith) - (sinDec * sin(myLatitude)) / (cosDec * cos(myLatitude))
-    
-        print("cosH after creation \(cosH)")
-
-        /*
-        if (cosH >  1)
-        the sun never rises on this location (on the specified date)
-        if (cosH < -1)
-        the sun never sets on this location (on the specified date)
-        */
-        
-        print("cosH after convertion \(cosH)")
-        
-        // this is where it goes wrong
-        var H = Double(acos(cosH))
-        
-
-        print("H after creation \(H)")
-
-        H = H / 15.0
-        
-        print("H after division \(H)")
-        
-        let T = H + RA - (0.06571 * t) - 6.622
-        
-         print("T \(T)")
-        
-        var UT = T - lngHour
-        
-         print("UT just created \(UT)")
-        
-        // Adjust UT into range if required
-        if UT > 24 { UT = UT - 24 }
-        if UT < 0 { UT = UT + 24 }
-        
-         print("UT after logic \(UT)")
+        updateSunsetLabel(sunsetTime)
         
         
         
-        
-        // 0 here is time adjustment to local time. The below is UTC
-        var localTime = UT + 0.0;
-        
-        print("localTime \(localTime)")
-    
         // END Calculate sunset
+        
+        var updateTimer: NSTimer!
+        updateTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "timerUpdate", userInfo: nil, repeats: true)
     
     }
     
@@ -155,6 +125,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     
-
+    
 }
 

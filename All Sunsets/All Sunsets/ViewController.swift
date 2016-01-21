@@ -21,19 +21,79 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 
     // initiate core location
     
-    func getCoordinates() -> CLLocationCoordinate2D
+    func updateCoordinates()
     {
         let locationManager = CLLocationManager()
-
-        // Initiating Location Services
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
-        locationManager.distanceFilter = kCLDistanceFilterNone
         locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
         
-        
         let currentLocation = locationManager.location?.coordinate
-        return currentLocation!
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        var lat : Double = 10.0
+        var lon : Double = 10.0
+        
+        
+        if (currentLocation!.latitude > 0)
+        {
+            lat = Double(currentLocation!.latitude)
+            lon = Double(currentLocation!.longitude)
+        }
+        else
+        {
+            lat = Double(0)
+            lon = Double(0)
+        }
+        
+        defaults.setDouble(lat, forKey: "Lat")
+        defaults.setDouble(lon, forKey: "Lon")
+        
+        print("Updated Lat: \(currentLocation!.latitude) Lon: \(currentLocation!.longitude)")
+        
+        (lat,lon) = getCoordinates()
+        
+        print("Readback: Lat: \(lat) Long: \(lon) ")
+    }
+    
+    func destroyCoordinates()
+    {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.removeObjectForKey("Lat")
+        defaults.removeObjectForKey("Lon")
+    }
+    
+    func getCoordinates() -> (Double,Double)
+    {
+    
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        if let latitude : Double = defaults.doubleForKey("Lat")
+        {
+            if latitude != 0.0
+            {
+                let lat = defaults.doubleForKey("Lat")
+                let lon = defaults.doubleForKey("Lon")
+                
+                latLabel.text = "Lat: \(lat)"
+                longLabel.text = "Long: \(lon)"
+                
+                return(lat,lon)
+            }
+            else
+            {
+                print("No data found, let's try to recreate it...")
+            }
+        }
+        
+        // No latitude found? Let's re-generate it:
+        
+        updateCoordinates()
+        let lat = defaults.doubleForKey("Lat")
+        let lon = defaults.doubleForKey("Lon")
+        
+        return(lat,lon)
         
     }
     
@@ -56,7 +116,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         let dateFormatter = NSDateFormatter()
         dateFormatter.timeStyle = .MediumStyle
         
-        let sunsetTime = GetSunset(getCoordinates().latitude, longitude: getCoordinates().longitude)
+        let (lat,long) = getCoordinates()
+        
+        let sunsetTime = GetSunset(lat, longitude: long)
         
         let timeUntil = NSDate().timeIntervalSinceDate(sunsetTime)
         
@@ -90,23 +152,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Set coordinates first stime
+        let (lat,lon) = getCoordinates()
+        latLabel.text = "Lat: \(lat)"
+        longLabel.text = "Long: \(lon)"
         
-        latLabel.text = "Latitude: \(getCoordinates().latitude)"
-        longLabel.text = "Longitude: \(getCoordinates().longitude)"
-        
-        // Run an update on the time
-        updateTime()
-        
-        // Calculate sunset
-        
-        let sunsetTime = GetSunset(getCoordinates().latitude, longitude: getCoordinates().longitude)
-        
+        // Set sunset label first time
+        let sunsetTime = GetSunset(lat, longitude: lon)
         updateSunsetLabel(sunsetTime)
-        
-        
-        
-        // END Calculate sunset
-        
+
         var updateTimer: NSTimer!
         updateTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "timerUpdate", userInfo: nil, repeats: true)
     
@@ -126,7 +180,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         print(error)
     }
     
+    @IBAction func updateLocation(sender: AnyObject) {
+        destroyCoordinates()
+    }
     
+    // make the status bar pretty
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent
+        
+    }
     
 }
 

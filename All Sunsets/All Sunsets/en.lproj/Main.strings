@@ -1,0 +1,27 @@
+
+/* Class = "UILabel"; text = "Longitude"; ObjectID = "53P-DN-DfQ"; */
+"53P-DN-DfQ.text" = "Longitude";
+
+/* Class = "UILabel"; text = "Current time"; ObjectID = "G1x-tv-vSV"; */
+"G1x-tv-vSV.text" = "Current time";
+
+/* Class = "UILabel"; text = "time"; ObjectID = "HNK-6C-vmB"; */
+"HNK-6C-vmB.text" = "time";
+
+/* Class = "UILabel"; text = "Latitude"; ObjectID = "HPt-7T-c0W"; */
+"HPt-7T-c0W.text" = "Latitude";
+
+/* Class = "UILabel"; text = "time"; ObjectID = "ON5-ma-UlS"; */
+"ON5-ma-UlS.text" = "time";
+
+/* Class = "UILabel"; text = "Next Sunset"; ObjectID = "TAx-Rz-ueT"; */
+"TAx-Rz-ueT.text" = "Next Sunset";
+
+/* Class = "UIButton"; normalTitle = "Update Location"; ObjectID = "ZsI-D5-5Tu"; */
+"ZsI-D5-5Tu.normalTitle" = "Update Location";
+
+/* Class = "UILabel"; text = "Time until next sunset"; ObjectID = "aJm-C4-FRz"; */
+"aJm-C4-FRz.text" = "Time until next sunset";
+
+/* Class = "UILabel"; text = "time"; ObjectID = "mXH-5s-zzW"; */
+"mXH-5s-zzW.text" = "time";

@@ -18,15 +18,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sunset.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="1zp-07-3Qp">
-                                <rect key="frame" x="-30" y="-50" width="660" height="700"/>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All Sunsets" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="IAE-5G-N4w">
                                 <rect key="frame" x="70" y="50" width="460" height="500"/>
                                 <fontDescription key="fontDescription" type="system" weight="black" pointSize="300"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <size key="shadowOffset" width="3" height="3"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sunset for launch.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="1zp-07-3Qp">
+                                <rect key="frame" x="-30" y="-50" width="660" height="700"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -77,6 +79,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="sunset.jpg" width="2430" height="3645"/>
+        <image name="sunset for launch.jpg" width="3231" height="2154"/>
     </resources>
 </document>

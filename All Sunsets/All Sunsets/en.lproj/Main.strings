@@ -18,7 +18,7 @@
 "TAx-Rz-ueT.text" = "Next Sunset";
 
 /* Class = "UIButton"; normalTitle = "Update Location"; ObjectID = "ZsI-D5-5Tu"; */
-"ZsI-D5-5Tu.normalTitle" = "Update Location";
+"ZsI-D5-5Tu.normalTitle" = "Update & Set Alarm";
 
 /* Class = "UILabel"; text = "Time until next sunset"; ObjectID = "aJm-C4-FRz"; */
 "aJm-C4-FRz.text" = "Time until next sunset";

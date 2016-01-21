@@ -98,7 +98,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     func updateTime()
     {
         let dateFormatter = NSDateFormatter()
-        dateFormatter.timeStyle = .MediumStyle
+        dateFormatter.timeStyle = .ShortStyle
         
         let timeString = "\(dateFormatter.stringFromDate(NSDate()))"
         
@@ -111,9 +111,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     func updateCountdown()
     {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.timeStyle = .MediumStyle
-        
         let (lat,long) = getCoordinates()
         let sunsetTime = GetSunset(lat, longitude: long)
         let timeUntil = NSDate().timeIntervalSinceDate(sunsetTime)
@@ -121,10 +118,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         let (h,m,s) = secToTime(secondsToGo)
         
         var timeString = ""
-            timeString = "\(h) hour"
-            if h != 1
-            { timeString = timeString + "s" }
-            timeString = " \(m)" + "minutes"
+            timeString = "\(h)h"
+            timeString = timeString + " \(m)" + "m"
         
         countdownSunsetLabel.text = timeString
     }
@@ -165,14 +160,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
         UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
         
-        alarmLabel("Press Update to set Alarm!")
+        // Hide label for now
+        alarmLabel.alpha = 0
         
     } // end run on load
     
     func alarmLabel(copy: String){
         alarmLabel.text = copy
         alarmLabel.alpha = 1
-        UIView.animateWithDuration(10, animations: {
+        UIView.animateWithDuration(3, animations: {
             self.alarmLabel.alpha = 0
         })
         
@@ -192,7 +188,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         print(error)
     }
     
-    @IBAction func updateLocation(sender: AnyObject) {
+    @IBAction func updateButton(sender: AnyObject) {
         destroyCoordinates()
     }
     

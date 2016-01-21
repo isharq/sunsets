@@ -18,25 +18,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All Sunsets" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="IAE-5G-N4w">
-                                <rect key="frame" x="70" y="50" width="460" height="500"/>
-                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="300"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                                <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <size key="shadowOffset" width="3" height="3"/>
-                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sunset for launch.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="1zp-07-3Qp">
                                 <rect key="frame" x="-30" y="-50" width="660" height="700"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All Sunsets" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="IAE-5G-N4w">
+                                <rect key="frame" x="25" y="50" width="550" height="500"/>
+                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="300"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="0.75" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
+                                <size key="shadowOffset" width="0.0" height="0.0"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="1zp-07-3Qp" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" id="1tA-kL-f8Q"/>
                             <constraint firstAttribute="trailingMargin" secondItem="1zp-07-3Qp" secondAttribute="trailing" constant="-50" id="AW7-UP-9JV"/>
-                            <constraint firstItem="IAE-5G-N4w" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="50" id="Acq-cz-QyZ"/>
+                            <constraint firstItem="IAE-5G-N4w" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="5" id="Acq-cz-QyZ"/>
                             <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="IAE-5G-N4w" secondAttribute="bottom" id="Cjk-B5-wpI"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="IAE-5G-N4w" secondAttribute="trailing" constant="50" id="Kuz-uo-0IL"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="IAE-5G-N4w" secondAttribute="trailing" constant="5" id="Kuz-uo-0IL"/>
                             <constraint firstItem="IAE-5G-N4w" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="-30" id="OoH-eB-yE7"/>
                             <constraint firstAttribute="trailingMargin" secondItem="IAE-5G-N4w" secondAttribute="trailing" constant="20" id="SuW-V6-L6a"/>
                             <constraint firstItem="1zp-07-3Qp" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" id="UGV-Wc-IjA"/>

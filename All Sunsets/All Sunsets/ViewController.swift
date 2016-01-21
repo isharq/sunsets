@@ -11,6 +11,7 @@ import CoreLocation
 
 class ViewController: UIViewController, CLLocationManagerDelegate {
     
+    
     //    @IBOutlet weak var testlabel: UILabel!
     @IBOutlet weak var longLabel: UILabel!
     @IBOutlet weak var latLabel: UILabel!
@@ -19,7 +20,22 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var countdownSunsetLabel: UILabel!
 
     // initiate core location
-    private var locationManager = CLLocationManager()
+    
+    func getCoordinates() -> CLLocationCoordinate2D
+    {
+        let locationManager = CLLocationManager()
+
+        // Initiating Location Services
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.distanceFilter = kCLDistanceFilterNone
+        locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
+        
+        
+        let currentLocation = locationManager.location?.coordinate
+        return currentLocation!
+        
+    }
     
     func updateTime()
     {
@@ -31,28 +47,26 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         timeNowLabel.text = timeString
     }
     
-    func getLatitude(){
-        
-        let currentLocation = locationManager.location?.coordinate
-
-        
-    }
-    func getLongitude(){
-        
+    func secToTime (seconds : Int) -> (Int, Int, Int) {
+        return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
     }
     
     func updateCountdown()
     {
-        
         let dateFormatter = NSDateFormatter()
         dateFormatter.timeStyle = .MediumStyle
         
-        // let sunsetTime = GetSunset(getLatitude(), getLongitude())
+        let sunsetTime = GetSunset(getCoordinates().latitude, longitude: getCoordinates().longitude)
         
-       // var totalWorkTime = NSDate().timeIntervalSinceDate(sunsetTime)
+        let timeUntil = NSDate().timeIntervalSinceDate(sunsetTime)
         
-        let timeString = "\(dateFormatter.stringFromDate(NSDate()))"
-
+        let secondsToGo : Int = Int(timeUntil*(-1))
+        
+        let (h,m,s) = secToTime(secondsToGo)
+        
+        var timeString = String(format: "%02d", h) + ":"
+            timeString = timeString + String(format: "%02d", m) + ":"
+            timeString = timeString + String(format: "%02d", s)
         
         countdownSunsetLabel.text = timeString
     }
@@ -76,23 +90,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Initiating Location Services
-        locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.distanceFilter = kCLDistanceFilterNone
-        locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
         
-        let currentLocation = locationManager.location?.coordinate
-        
-        latLabel.text = "Latitude: \(currentLocation!.latitude)"
-        longLabel.text = "Longitude: \(currentLocation!.longitude)"
+        latLabel.text = "Latitude: \(getCoordinates().latitude)"
+        longLabel.text = "Longitude: \(getCoordinates().longitude)"
         
         // Run an update on the time
         updateTime()
         
         // Calculate sunset
         
-        let sunsetTime = GetSunset(currentLocation!.latitude, longitude: currentLocation!.longitude)
+        let sunsetTime = GetSunset(getCoordinates().latitude, longitude: getCoordinates().longitude)
         
         updateSunsetLabel(sunsetTime)
         
@@ -110,11 +117,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         // Dispose of any resources that can be recreated.
     }
 
-    
-    @IBAction func getFixPressed(sender: AnyObject) {
-        locationManager.requestLocation()
-    }
-    
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print(locations)

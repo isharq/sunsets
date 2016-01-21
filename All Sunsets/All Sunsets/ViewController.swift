@@ -103,6 +103,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         let timeString = "\(dateFormatter.stringFromDate(NSDate()))"
         
         timeNowLabel.text = timeString
+        
     }
     
     func secToTime (seconds : Int) -> (Int, Int, Int) {
@@ -128,14 +129,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     {
             updateTime()
             updateCountdown()
+            updateSunsetLabel()
     }
     
-    func updateSunsetLabel(time: NSDate)
+    func updateSunsetLabel()
     {
+        let (lat,lon) = getCoordinates()
+        let sunsetTime = GetSunset(lat, longitude: lon)
+
         let dateFormatter = NSDateFormatter()
         dateFormatter.timeStyle = .ShortStyle
 
-        let timeString = "\(dateFormatter.stringFromDate(time))"
+        let timeString = "\(dateFormatter.stringFromDate(sunsetTime))"
         timeSunsetLabel.text = timeString
     }
     
@@ -146,9 +151,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         // Set coordinates first stime
         let (lat,lon) = getCoordinates()
         
-        // Set sunset label first time
-        let sunsetTime = GetSunset(lat, longitude: lon)
-        updateSunsetLabel(sunsetTime)
+
+        // Set explanation labels
+        timeSunsetLabel.text        = "Sunset Time"
+        timeNowLabel.text           = "Time Now"
+        countdownSunsetLabel.text   = "Countdown"
+
         
         // Run a timer to keep the clocks up to date.
             let updateTimer: NSTimer!
@@ -234,5 +242,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         print("Cleared old, and new notification for \(sunsetAlarmTime)")
         }
     
+        
 }
 

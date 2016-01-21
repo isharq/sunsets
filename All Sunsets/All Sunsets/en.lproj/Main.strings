@@ -6,13 +6,13 @@
 "G1x-tv-vSV.text" = "Current time";
 
 /* Class = "UILabel"; text = "time"; ObjectID = "HNK-6C-vmB"; */
-"HNK-6C-vmB.text" = "time";
+"HNK-6C-vmB.text" = "Sunset Time";
 
 /* Class = "UILabel"; text = "Latitude"; ObjectID = "HPt-7T-c0W"; */
 "HPt-7T-c0W.text" = "Latitude";
 
 /* Class = "UILabel"; text = "time"; ObjectID = "ON5-ma-UlS"; */
-"ON5-ma-UlS.text" = "time";
+"ON5-ma-UlS.text" = "countdown";
 
 /* Class = "UILabel"; text = "Next Sunset"; ObjectID = "TAx-Rz-ueT"; */
 "TAx-Rz-ueT.text" = "Next Sunset";
@@ -24,4 +24,4 @@
 "aJm-C4-FRz.text" = "Time until next sunset";
 
 /* Class = "UILabel"; text = "time"; ObjectID = "mXH-5s-zzW"; */
-"mXH-5s-zzW.text" = "time";
+"mXH-5s-zzW.text" = "time now";

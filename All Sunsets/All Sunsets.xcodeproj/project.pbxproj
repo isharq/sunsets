@@ -21,7 +21,6 @@
 
 /* Begin PBXFileReference section */
 		213001DD1C50957A00CC1B66 /* sunset.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sunset.jpg; sourceTree = "<group>"; };
-		213001E01C50A6AD00CC1B66 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		213001E11C50A74F00CC1B66 /* sunset for launch.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "sunset for launch.jpg"; sourceTree = "<group>"; };
 		213001EF1C50AFAE00CC1B66 /* sunset - icon - dribble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sunset - icon - dribble.png"; sourceTree = "<group>"; };
 		213001F11C50B01600CC1B66 /* sunset - dribble - 180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sunset - dribble - 180.png"; sourceTree = "<group>"; };
@@ -169,7 +168,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				219F479D1C4E504C00D0BAE5 /* Base */,
-				213001E01C50A6AD00CC1B66 /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

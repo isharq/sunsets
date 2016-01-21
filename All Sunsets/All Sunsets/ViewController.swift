@@ -15,11 +15,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         static let locationManager = CLLocationManager()
     }
     
-    @IBOutlet weak var longLabel: UILabel!
-    @IBOutlet weak var latLabel: UILabel!
     @IBOutlet weak var timeNowLabel: UILabel!
     @IBOutlet weak var timeSunsetLabel: UILabel!
     @IBOutlet weak var countdownSunsetLabel: UILabel!
+    @IBOutlet weak var latLonLabel: UILabel!
+    @IBOutlet weak var alarmLabel: UILabel!
     
     func updateCoordinates()
     {
@@ -55,6 +55,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             (lat,lon) = getCoordinates()
             print("Readback: Lat: \(lat) Long: \(lon) ")
         
+            latLonLabel.text = String(format: "Lat: %.3f", lat) + String(format: " / Lon: %.3f", lon)
+        
+        scheduleLocal(self)
+        
+        
     }
     
     func destroyCoordinates()
@@ -62,6 +67,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.removeObjectForKey("Lat")
         defaults.removeObjectForKey("Lon")
+        print("\nCleared Lat and Long")
     }
     
     func getCoordinates() -> (Double,Double)
@@ -73,9 +79,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         {
             let lat = defaults.doubleForKey("Lat")
             let lon = defaults.doubleForKey("Lon")
-            
-            latLabel.text = "Lat: \(lat)"
-            longLabel.text = "Long: \(lon)"
             return(lat,lon)
         }
         else
@@ -117,9 +120,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         let secondsToGo : Int = Int(timeUntil*(-1))
         let (h,m,s) = secToTime(secondsToGo)
         
-        var timeString = String(format: "%02d", h) + ":"
-            timeString = timeString + String(format: "%02d", m) + ":"
-            timeString = timeString + String(format: "%02d", s)
+        var timeString = ""
+            timeString = "\(h) hour"
+            if h != 1
+            { timeString = timeString + "s" }
+            timeString = " \(m)" + "minutes"
         
         countdownSunsetLabel.text = timeString
     }
@@ -133,7 +138,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     func updateSunsetLabel(time: NSDate)
     {
         let dateFormatter = NSDateFormatter()
-        dateFormatter.timeStyle = .MediumStyle
+        dateFormatter.timeStyle = .ShortStyle
 
         let timeString = "\(dateFormatter.stringFromDate(time))"
         timeSunsetLabel.text = timeString
@@ -145,13 +150,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
         // Set coordinates first stime
         let (lat,lon) = getCoordinates()
-        latLabel.text = "Lat: \(lat)"
-        longLabel.text = "Long: \(lon)"
         
         // Set sunset label first time
         let sunsetTime = GetSunset(lat, longitude: lon)
         updateSunsetLabel(sunsetTime)
-
+        
         // Run a timer to keep the clocks up to date.
             let updateTimer: NSTimer!
             updateTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "timerUpdate", userInfo: nil, repeats: true)
@@ -161,6 +164,17 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         let notificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Sound], categories: nil)
         UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
         UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
+        
+        alarmLabel("Press Update to set Alarm!")
+        
+    } // end run on load
+    
+    func alarmLabel(copy: String){
+        alarmLabel.text = copy
+        alarmLabel.alpha = 1
+        UIView.animateWithDuration(10, animations: {
+            self.alarmLabel.alpha = 0
+        })
         
     }
     
@@ -200,12 +214,28 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         }
         
         let notification = UILocalNotification()
-        notification.fireDate = NSDate(timeIntervalSinceNow: 5)
-        notification.alertBody = "Hey you! Yeah you! Swipe to unlock!"
-        notification.alertAction = "be awesome!"
+        // Clear all existing notifications
+        UIApplication.sharedApplication().cancelAllLocalNotifications()
+        
+        
+        // Set sunset alarm time (10 mins before sunset)
+        let (lat,lon) = getCoordinates()
+        let sunsetAlarmTime = GetSunset(lat, longitude: lon).dateByAddingTimeInterval((-1)*60*10)
+        
+        notification.fireDate = sunsetAlarmTime
+        notification.alertBody = "Time to go gaze at the sunset!"
+        notification.alertAction = "check the time!"
         notification.soundName = UILocalNotificationDefaultSoundName
         notification.userInfo = ["CustomField1": "w00t"]
         UIApplication.sharedApplication().scheduleLocalNotification(notification)
+        
+        // Show the user that something happened
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.timeStyle = .ShortStyle
+        let timeString = "Alarm set for \(dateFormatter.stringFromDate(sunsetAlarmTime))"
+        alarmLabel(timeString)
+        
+        print("Cleared old, and new notification for \(sunsetAlarmTime)")
         }
     
 }

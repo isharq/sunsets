@@ -57,17 +57,14 @@ import CoreLocation
     }
     
     
-    
     // START SUNSET FUNCTION
     
 func GetSunset(latitude:Double, longitude:Double) -> NSDate {
-        
-        
         let inDate = NSDate()
         
         let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
         
-        let zenith : Double = 90.833
+        let zenith : Double = 90
         
         let components = calendar.components([.Year, .Month, .Day, .TimeZone] , fromDate: inDate)
         
@@ -83,8 +80,7 @@ func GetSunset(latitude:Double, longitude:Double) -> NSDate {
 //        let longitude = currentLocation!.longitude
         
         let lngHour : Double = longitude / 15.0
-        
-        
+    
         var t : Double
             t = N + ((18.0 - lngHour) / 24)
         
@@ -145,26 +141,31 @@ func GetSunset(latitude:Double, longitude:Double) -> NSDate {
         
         //9. adjust back to UTC
         let UT = normalize_range(T - lngHour, max: 24.0);
-        
-        
+    
+    
         //10. convert UT value to local time zone of latitude/longitude
         
-        let timezone : NSTimeZone = components.timeZone!;
+        let timezone : NSTimeZone = components.timeZone!
         let localSeconds : Double = Double(timezone.secondsFromGMTForDate(inDate))
-        let localOffset : Double =   localSeconds / 3600.0;
+        let localOffset : Double =   localSeconds / 3600.0
         let localT = UT + localOffset
         
         // convert to an NSDate
-        let hour = trunc(localT);
-        let hourSeconds = 3600 * (localT - hour);
-        let minute = hourSeconds / 60;
-        let second = hourSeconds - (minute * 60);
+        let hour = trunc(localT)
+        let hourSeconds = 3600 * (localT - hour)
+        let minute = hourSeconds / 60
+        let second = hourSeconds - (minute * 60)
         
         components.hour = Int(hour)
-        components.minute = Int( minute)
+        components.minute = Int( minute) ;
         components.second = Int(second)
         
-        let sunset = calendar.dateFromComponents(components)!
-        
+        var sunset = calendar.dateFromComponents(components)!
+    
+        if sunset.timeIntervalSince1970 < inDate.timeIntervalSince1970
+        {
+            sunset = sunset.dateByAddingTimeInterval(24*3600)
+        }
+    
         return sunset
     } // end function

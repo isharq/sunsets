@@ -18,7 +18,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var timeNowLabel: UILabel!
     @IBOutlet weak var timeSunsetLabel: UILabel!
     @IBOutlet weak var countdownSunsetLabel: UILabel!
-    @IBOutlet weak var latLonLabel: UILabel!
     @IBOutlet weak var alarmLabel: UILabel!
     
     
@@ -63,8 +62,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         (lat,lon) = getCoordinates()
         print("Readback: Lat: \(lat) Long: \(lon) ")
     
-        // Update the LatLong Label in the UI to aid troubleshooting.
-        latLonLabel.text = String(format: "Lat: %.3f", lat) + String(format: " / Lon: %.3f", lon)
         
         // And finally, schedule the alarm to go off later.
         scheduleLocal(self)
@@ -138,7 +135,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         let secondsToGo : Int = Int(timeUntil*(-1))
         
         // Return as a sensibe format
-        let (h,m,s) = secToTime(secondsToGo)
+        let (h,m,_) = secToTime(secondsToGo)
         
         // Create and write string
         var timeString = ""
@@ -182,9 +179,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Set coordinates first stime
-        let (lat,lon) = getCoordinates()
-
         // Initialise labels in the UI, so users have a chance of seeing what it's for.
         timeSunsetLabel.text        = "Sunset Time"
         timeNowLabel.text           = "Time Now"
@@ -230,10 +224,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         print(error)
     }
     
-    // Run the Destroy Coordinates function when a user clicks the button
-    @IBAction func updateButton(sender: AnyObject) {
+   
+    @IBAction func reLocateButton(sender: AnyObject) {
         destroyCoordinates()
     }
+    
     
     // make the status bar pretty
     override func preferredStatusBarStyle() -> UIStatusBarStyle {

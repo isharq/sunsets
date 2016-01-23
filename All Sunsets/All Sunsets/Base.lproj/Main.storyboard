@@ -23,12 +23,6 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sunset.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="B47-Fp-9W9">
                                 <rect key="frame" x="-30" y="-50" width="660" height="700"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Lat / Long" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vFr-TT-ol8">
-                                <rect key="frame" x="540" y="0.0" width="40" height="10"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="8"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="time now" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="mXH-5s-zzW">
                                 <rect key="frame" x="-6" y="0.0" width="612" height="108"/>
                                 <constraints>
@@ -57,8 +51,25 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="countdown" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="ON5-ma-UlS">
-                                <rect key="frame" x="95" y="514" width="511" height="108"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="FPD-Gm-TgA">
+                                <rect key="frame" x="20" y="271" width="560" height="58"/>
+                                <color key="backgroundColor" red="0.96470588239999999" green="0.78039215689999997" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="48"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HFj-5N-2HJ">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <items>
+                                    <barButtonItem title="Re-locate &amp; set alarm" id="YSJ-Tq-YWS">
+                                        <connections>
+                                            <action selector="reLocateButton:" destination="BYZ-38-t0r" id="eYB-30-bGx"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="countdown" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="ON5-ma-UlS">
+                                <rect key="frame" x="-6" y="470" width="612" height="108"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="EmS-vn-oOA"/>
                                 </constraints>
@@ -71,45 +82,29 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jqS-cz-0uk">
-                                <rect key="frame" x="20" y="570" width="151" height="30"/>
-                                <state key="normal" title="Update and Set Alarm"/>
-                                <connections>
-                                    <action selector="updateButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WNy-En-LZa"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="FPD-Gm-TgA">
-                                <rect key="frame" x="20" y="352" width="560" height="58"/>
-                                <color key="backgroundColor" red="0.96470588239999999" green="0.78039215689999997" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="48"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="vFr-TT-ol8" secondAttribute="trailing" id="08p-E7-XZy"/>
                             <constraint firstItem="mXH-5s-zzW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0VH-Eg-oWb"/>
-                            <constraint firstItem="jqS-cz-0uk" firstAttribute="top" secondItem="ON5-ma-UlS" secondAttribute="bottom" id="1VK-LF-61V"/>
                             <constraint firstItem="HNK-6C-vmB" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="1Yk-c1-unt"/>
                             <constraint firstItem="mXH-5s-zzW" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-26" id="210-au-skF"/>
                             <constraint firstItem="mXH-5s-zzW" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="-20" id="21x-9l-Djg"/>
                             <constraint firstItem="ON5-ma-UlS" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="4Ri-lx-Orw"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ON5-ma-UlS" secondAttribute="trailing" constant="-26" id="4rQ-xb-CHM"/>
                             <constraint firstItem="ON5-ma-UlS" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="ALJ-x7-zO1"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="jqS-cz-0uk" secondAttribute="bottom" id="Cx2-w4-MsP"/>
                             <constraint firstItem="ON5-ma-UlS" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-26" id="D65-Um-7IQ"/>
                             <constraint firstItem="HNK-6C-vmB" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="EBT-Ir-Xxe"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="vFr-TT-ol8" secondAttribute="bottom" constant="20" id="G5R-kG-34v"/>
+                            <constraint firstItem="HFj-5N-2HJ" firstAttribute="top" secondItem="ON5-ma-UlS" secondAttribute="baseline" id="HGs-ts-O0y"/>
                             <constraint firstItem="HNK-6C-vmB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-26" id="L5N-Y3-mFb"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ON5-ma-UlS" secondAttribute="bottom" constant="20" id="Ls5-3r-LS9"/>
                             <constraint firstItem="FPD-Gm-TgA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="NSh-MD-Gly"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ON5-ma-UlS" secondAttribute="trailing" id="OnD-on-UWK"/>
+                            <constraint firstItem="HFj-5N-2HJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="T2w-Td-c4H"/>
                             <constraint firstItem="B47-Fp-9W9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-50" id="Ykl-dT-Crh"/>
                             <constraint firstItem="FPD-Gm-TgA" firstAttribute="top" secondItem="ON5-ma-UlS" secondAttribute="firstBaseline" id="ZnW-wN-0h7"/>
                             <constraint firstItem="ON5-ma-UlS" firstAttribute="top" secondItem="HNK-6C-vmB" secondAttribute="bottom" id="aLq-su-zaQ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ON5-ma-UlS" secondAttribute="trailing" id="aa2-8a-ILl"/>
                             <constraint firstAttribute="bottomMargin" secondItem="B47-Fp-9W9" secondAttribute="bottom" constant="-50" id="bq9-s5-X5i"/>
-                            <constraint firstItem="jqS-cz-0uk" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="eSj-M3-9TI"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ON5-ma-UlS" secondAttribute="trailing" constant="-26" id="foV-4h-90j"/>
                             <constraint firstItem="ON5-ma-UlS" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="for-U1-wb7"/>
                             <constraint firstItem="HNK-6C-vmB" firstAttribute="top" secondItem="mXH-5s-zzW" secondAttribute="bottom" id="g29-gQ-dzE"/>
@@ -118,6 +113,8 @@
                             <constraint firstAttribute="bottomMargin" secondItem="ON5-ma-UlS" secondAttribute="firstBaseline" id="jso-dg-JMP"/>
                             <constraint firstItem="ON5-ma-UlS" firstAttribute="top" secondItem="HNK-6C-vmB" secondAttribute="bottom" constant="174" id="lLU-hg-Hec"/>
                             <constraint firstItem="ON5-ma-UlS" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-26" id="lNv-Z7-Bip"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="HFj-5N-2HJ" secondAttribute="trailing" constant="-20" id="oDo-rN-sjl"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="HFj-5N-2HJ" secondAttribute="bottom" id="uAT-mA-7DI"/>
                             <constraint firstAttribute="trailingMargin" secondItem="mXH-5s-zzW" secondAttribute="trailing" id="uZH-8Y-0kR"/>
                             <constraint firstItem="FPD-Gm-TgA" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="utf-9K-X6D"/>
                             <constraint firstItem="B47-Fp-9W9" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="-50" id="wCv-rH-esO"/>
@@ -143,9 +140,9 @@
                                 <exclude reference="aLq-su-zaQ"/>
                                 <exclude reference="aa2-8a-ILl"/>
                                 <exclude reference="for-U1-wb7"/>
+                                <exclude reference="jso-dg-JMP"/>
                                 <exclude reference="lLU-hg-Hec"/>
-                                <exclude reference="1VK-LF-61V"/>
-                                <exclude reference="G5R-kG-34v"/>
+                                <exclude reference="Ls5-3r-LS9"/>
                             </mask>
                         </variation>
                     </view>
@@ -153,7 +150,6 @@
                     <connections>
                         <outlet property="alarmLabel" destination="FPD-Gm-TgA" id="hQi-EA-UYx"/>
                         <outlet property="countdownSunsetLabel" destination="ON5-ma-UlS" id="wt5-30-OHt"/>
-                        <outlet property="latLonLabel" destination="vFr-TT-ol8" id="Jkw-HY-qmD"/>
                         <outlet property="timeNowLabel" destination="mXH-5s-zzW" id="FfB-ME-HhT"/>
                         <outlet property="timeSunsetLabel" destination="HNK-6C-vmB" id="0eh-Ao-7ge"/>
                     </connections>
